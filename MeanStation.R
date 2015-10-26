@@ -19,6 +19,11 @@ stationBonus <- merge(x = stations,y = velov)
 
 sat <- stationBonus$SATURATION
 
+p_velov <- subset(stationBonus, select=c("ID_STATION","NOM_STATION","SATURATION"))
+head <- c("Identifiant","Nom","Variance Saturation")
+names(p_velov) <- head
+View(p_velov)
+
 png(filename="stations-saturation.jpg")
 boxplot(sat,horizontal=T,main="Variance de la saturation par station",xlab="Variance de la saturation")
 dev.off()
