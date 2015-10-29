@@ -1,5 +1,4 @@
 options(encoding="UTF8")
-setwd("C:/Users/Antoine/R")
 require(ggmap)
 require(mapproj)
 
@@ -56,7 +55,3 @@ a <- a + geom_point(data=d, aes(x = lat,y = lon), colour=cl2$cluster)
 a <- a + ggtitle("Classement des stations en 2 groupes")
 plot(a)
 dev.off()
-
-
-
-

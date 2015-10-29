@@ -1,5 +1,4 @@
 options(encoding="UTF8")
-setwd("C:/Users/Antoine/R")
 require(ggmap)
 require(mapproj)
 
@@ -29,15 +28,3 @@ alt <- stationBonus$ALTITUDE
 cl2 <- kmeans(alt, 2)
 
 print(cor.test(cl2$cluster, stationBonus$BONUS))
-
-
-
-
-
-
-
-
-
-
-
-
