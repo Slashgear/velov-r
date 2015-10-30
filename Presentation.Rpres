@@ -55,6 +55,8 @@ Analyse de l'altitude des Stations
 ```{r, echo=FALSE}
 stations <- read.csv2("EDD/stations.csv", header = TRUE, sep = ";", quote = "\"")
 faits <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
+meteo <- read.csv2("EDD/meteo.csv", header = TRUE, sep = ";", quote = "\"")
+temps <- read.csv2("EDD/temps.csv", header = TRUE, sep = ";", quote = "\"")
 summary(subset(stations,select=c("ALTITUDE")))
 ```
 
@@ -153,6 +155,59 @@ Vérifications
 ```{r}
 cor.test(cl2$cluster, stationBonus$BONUS)
 ```
+
+
+L'influence de l'altitude sur l'activité d'une station
+========================================================
+type: sub-section
+
+**Saturation** d'une station = Vélos/ (emplacements vide + Vélos)
+
+**Activité** d'une station correspond à la dispersion des valeurs de saturation. On utilise donc la variance.
+
+
+Gourpement par Activité
+========================================================
+```{r, echo=FALSE}
+velov2 <- subset(faits, select=c("ID_STATION", "SATURATION"))
+stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE","ALTITUDE"))
+
+#Group by ID_STATION and Mean
+velov2 <- aggregate(velov2,by=list(velov2$ID_STATION),FUN="var")
+velov2$ID_STATION <- velov2$Group.1
+
+#Merge infos
+stationBonus <- merge(x = stations2,y = velov2)
+sat <- stationBonus$SATURATION
+
+cl2 <- kmeans(sat, 2)
+cl3 <- kmeans(sat, 3)
+cl4 <- kmeans(sat, 4)
+cl5 <- kmeans(sat, 5)
+
+d <- data.frame(lat=stationBonus$LONGITUDE,
+             lon=stationBonus$LATITUDE,cl5$cluster)
+a <- ggmap(mapImageData1, extent = "panel")
+a <- a + geom_point(data=d, aes(x = lat,y = lon, colour=cl5$cluster), colour=cl5$cluster)
+a <- a + ggtitle("Classement des stations en 5 groupes")
+plot(a)
+```
+***
+```{r, echo=FALSE}
+d <- data.frame(lat=stationBonus$LONGITUDE,
+             lon=stationBonus$LATITUDE,cl2$cluster)
+a <- ggmap(mapImageData1, extent = "panel")
+a <- a + geom_point(data=d, aes(x = lat,y = lon, colour=cl2$cluster), colour=cl2$cluster)
+a <- a + ggtitle("Classement des stations en 2 groupes")
+plot(a)
+```
+
+Lien entre la saturation et le nombre de stations voisines vides
+========================================================
+type: sub-section
+
+**Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
+
 
 Conclusion
 ========================================================

@@ -117,6 +117,29 @@ sample estimates:
 0.03921043 
 ```
 
+
+L'influence de l'altitude sur l'activité d'une station
+========================================================
+type: sub-section
+
+**Saturation** d'une station = Vélos/ (emplacements vide + Vélos)
+
+**Activité** d'une station correspond à la dispersion des valeurs de saturation. On utilise donc la variance.
+
+
+Gourpement par Activité
+========================================================
+![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
+***
+![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
+
+Lien entre la saturation et le nombre de stations voisines vides
+========================================================
+type: sub-section
+
+**Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
+
+
 Conclusion
 ========================================================
 
