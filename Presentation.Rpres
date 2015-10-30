@@ -1,0 +1,123 @@
+Lien entre le statut "Bonus" d'une station et son altitude
+========================================================
+author: Antoine CARON, Adrien Chaussende, Alexandre Galdéano, Cédric Ginot, Thomas Coquan, Sophie Perraud
+date: Octobre 2015
+
+Le Bonus
+========================================================
+
+Nous nous sommes intéressé à la façon dont JCDECAUX avait groupé ses stations pour former:
+- Les stations avec Bonus
+- Les stations sans Bonus
+
+Analyse de l'altitude des Stations
+========================================================
+
+```{r, echo=FALSE}
+stations <- read.csv2("EDD/stations.csv", header = TRUE, sep = ";", quote = "\"")
+summary(subset(stations,select=c("ALTITUDE")))
+```
+
+Répartition des altitudes de stations
+========================================================
+
+```{r, echo=FALSE}
+boxplot(stations$ALTITUDE,horizontal=T,main="Altitude des Stations")
+```
+
+Groupements par altitudes de stations
+========================================================
+
+```{r, echo=FALSE}
+cl2 <- kmeans(stations$ALTITUDE, 2)
+cl3 <- kmeans(stations$ALTITUDE, 3)
+cl4 <- kmeans(stations$ALTITUDE, 4)
+cl5 <- kmeans(stations$ALTITUDE, 5)
+dunn2 <- cl2$betweenss/cl2$totss
+dunn3 <- cl3$betweenss/cl3$totss
+dunn4 <- cl4$betweenss/cl4$totss
+dunn5 <- cl5$betweenss/cl5$totss
+plot(stations$ALTITUDE, col = cl2$cluster,main="2 groupes d'altitude",sub=dunn2,ylab="Altitude en m")
+```
+***
+```{r, echo=FALSE}
+plot(stations$ALTITUDE, col = cl3$cluster,main="3 groupes d'altitude",sub=dunn3,ylab="Altitude en m")
+```
+
+Visualisation du groupement
+========================================================
+
+```{r, echo=FALSE}
+require(ggmap)
+require(mapproj)
+mapImageData1 <- get_map(location = c(lon = 4.850000, lat = 45.750000),
+                         source = "google",
+                         zoom = 12)
+```
+
+```{r, echo=FALSE}
+d <- data.frame(lat=stations$LONGITUDE,
+                lon=stations$LATITUDE,cl2$cluster)
+a <- ggmap(mapImageData1, extent = "panel")
+a <- a + geom_point(data=d, aes(x = lat,y = lon), colour=cl2$cluster)
+a <- a + ggtitle("Classement des stations en 2 groupes")
+plot(a)
+```
+***
+```{r, echo=FALSE}
+d <- data.frame(lat=stations$LONGITUDE,
+                lon=stations$LATITUDE,cl3$cluster)
+a <- ggmap(mapImageData1, extent = "panel")
+a <- a + geom_point(data=d, aes(x = lat,y = lon), colour=cl3$cluster)
+a <- a + ggtitle("Classement des stations en 3 groupes")
+plot(a)
+```
+
+Groupement par "Bonus" actuel
+========================================================
+```{r, echo=FALSE}
+velov <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
+bonus <- factor(velov$BONUS)
+velov$BONUS <- as.integer(bonus)
+velov <- aggregate(velov,by=list(velov$ID_STATION),FUN="mean")
+velov <- subset(velov, select=c("ID_STATION", "BONUS"))
+stationBonus <- merge(x = stations,y = velov)
+
+d <- data.frame(lat=stationBonus$LONGITUDE,
+                lon=stationBonus$LATITUDE,stationBonus$BONUS)
+a <- ggmap(mapImageData1, extent = "panel",legend="topright")
+a <- a + geom_point(data=d, aes(x = lat,y = lon),colour=stationBonus$BONUS)
+a <- a + ggtitle("Stations avec Bonus")
+plot(a)
+```
+
+Comparaison entre les deux groupements
+========================================================
+
+```{r, echo=FALSE}
+plot(a)
+```
+***
+```{r, echo=FALSE}
+d <- data.frame(lat=stations$LONGITUDE,
+                lon=stations$LATITUDE,cl2$cluster)
+a <- ggmap(mapImageData1, extent = "panel")
+a <- a + geom_point(data=d, aes(x = lat,y = lon), colour=cl2$cluster)
+a <- a + ggtitle("Classement des stations en 2 groupes")
+plot(a)
+```
+
+Vérifications
+========================================================
+
+```{r}
+cor.test(cl2$cluster, stationBonus$BONUS)
+```
+
+Conclusion
+========================================================
+
+Le choix du bonus ne dépend donc uniquement que de l'altitude de la station.
+Il reste à montrer que l'altitude impacte l'utilisation de la station.
+
+

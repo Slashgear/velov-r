@@ -2,3 +2,6 @@
 .RData
 .Rhistory
 /EDD
+.Rproj.user
+*.png
+*.html
