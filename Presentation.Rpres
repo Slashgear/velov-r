@@ -1,11 +1,50 @@
-Lien entre le statut "Bonus" d'une station et son altitude
+Projet BI - Les Vélovs
 ========================================================
 author: Antoine CARON, Adrien Chaussende, Alexandre Galdéano, Cédric Ginot, Thomas Coquan, Sophie Perraud
 date: Octobre 2015
 
-Le Bonus
+
+Présentation générale
+========================================================
+L’idée principales : connaître les conditions d’utilisation des vélovs, notamment par rapport à la météo.
+
+Récupération des données via trois webservices :
+* État des velovs : Webservices de JCDecaux
+* État de la météo : Webservices de Forecast.io
+* Altitude des stations vélovs : Webservices de Google
+
+Utilisation unique de l'Open-Data
+
+
+Nos KPI
+========================================================
+* Quelle est l'influence de la météo sur l'utilisation des Velovs ?
+* Quelle est l'influence d'une station en panne, vide ou pleine sur les stations voisines ?
+* Identifier différents groupes de stations.
+* Comment ont-été mis en place les stations bonus ?
+* Quelles sont les stations les plus actives et les moins actives ?
+* Identifier des facteurs de pannes et la récurrence de celle-ci.
+* Quelles sont les horaires de forte activité ?
+* Quel est l'influence des week-ends ...
+
+Un projet en plusieurs étapes
 ========================================================
 
+//TODO faire un shéma
+Collecte des données par sh et CRON
+
+Traitement des JSON en sql
+
+Import des SQL dans l'ODS
+
+ETL pour l'EDD (SQL et Talend)
+
+Reporting R et QlikSense
+
+
+Le Bonus
+========================================================
+type: sub-section
 Nous nous sommes intéressé à la façon dont JCDECAUX avait groupé ses stations pour former:
 - Les stations avec Bonus
 - Les stations sans Bonus
@@ -15,6 +54,7 @@ Analyse de l'altitude des Stations
 
 ```{r, echo=FALSE}
 stations <- read.csv2("EDD/stations.csv", header = TRUE, sep = ";", quote = "\"")
+faits <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
 summary(subset(stations,select=c("ALTITUDE")))
 ```
 
@@ -76,7 +116,7 @@ plot(a)
 Groupement par "Bonus" actuel
 ========================================================
 ```{r, echo=FALSE}
-velov <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
+velov <- faits
 bonus <- factor(velov$BONUS)
 velov$BONUS <- as.integer(bonus)
 velov <- aggregate(velov,by=list(velov$ID_STATION),FUN="mean")
@@ -117,7 +157,12 @@ cor.test(cl2$cluster, stationBonus$BONUS)
 Conclusion
 ========================================================
 
-Le choix du bonus ne dépend donc uniquement que de l'altitude de la station.
+Le choix du bonus dépend donc uniquement que de l'altitude de la station.
 Il reste à montrer que l'altitude impacte l'utilisation de la station.
 
+Pour aller plus loin
+========================================================
+type: prompt
+Grâce à cette collecte de données nous pourrions être en mesure de mettre en place un modèle prédictif afin de permettre aux usagers des Vélovs de déterminer à l'avance si un vélo ou emplacement sera disponible dans le futur.
 
+Il serait intéressant de lier cela avec le projet Web "Lyon Vélov"
