@@ -202,11 +202,44 @@ a <- a + ggtitle("Classement des stations en 2 groupes")
 plot(a)
 ```
 
-Lien entre la saturation et le nombre de stations voisines vides
+Voisines Vides
 ========================================================
 type: sub-section
+```{r, echo=FALSE}
 
+velov2 <- subset(faits, select=c("ID_STATION", "SATURATION","STAT_VIDES"))
+stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE"))
+
+#Group by station and stat
+velov2 <- aggregate(velov2,by=list(velov2$ID_STATION,velov2$STAT_VIDES),FUN="mean")
+
+#Merge infos
+stationBonus <- merge(x = stations2,y = velov2)
+plot(stationBonus$SATURATION,stationBonus$STAT_VIDES,main="Saturation moyenne/nombre de voisines vides",xlab="Saturation moyenne",ylab="Nombre de voisines vides")
+
+```
+***
 **Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
+
+Voisines Vides
+========================================================
+
+```{r, echo=FALSE}
+stationEx <- stationBonus[stationBonus$ID_STATION == 1021,]
+plot(stationEx$SATURATION,stationEx$STAT_VIDES,main="Saturation moyenne/nombre de voisines vides - Station 1021",xlab="Saturation moyenne",ylab="Nombre de voisines vides")
+line <- lm(stationEx$STAT_VIDES ~ stationEx$SATURATION)
+abline(line)
+
+```
+***
+```{r, echo=FALSE}
+cor.test(stationEx$SATURATION, stationEx$STAT_VIDES)
+```
+
+
+Résultats obtenus avec Qlik
+========================================================
+type: sub-section
 
 
 Conclusion

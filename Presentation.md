@@ -133,11 +133,37 @@ Gourpement par Activité
 ***
 ![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
 
-Lien entre la saturation et le nombre de stations voisines vides
+Voisines Vides
 ========================================================
 type: sub-section
-
+![plot of chunk unnamed-chunk-14](Presentation-figure/unnamed-chunk-14-1.png) 
+***
 **Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
+
+Voisines Vides
+========================================================
+
+![plot of chunk unnamed-chunk-15](Presentation-figure/unnamed-chunk-15-1.png) 
+***
+
+```
+
+	Pearson's product-moment correlation
+
+data:  stationEx$SATURATION and stationEx$STAT_VIDES
+t = -4.8957, df = 7, p-value = 0.001762
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9745060 -0.5186647
+sample estimates:
+       cor 
+-0.8797506 
+```
+
+
+Résultats obtenus avec Qlik
+========================================================
+type: sub-section
 
 
 Conclusion
