@@ -108,13 +108,13 @@ cor.test(cl2$cluster, stationBonus$BONUS)
 	Pearson's product-moment correlation
 
 data:  cl2$cluster and stationBonus$BONUS
-t = 0.72886, df = 345, p-value = 0.4666
+t = -1246500000, df = 345, p-value < 2.2e-16
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -0.06634603  0.14389896
+ -1 -1
 sample estimates:
-       cor 
-0.03921043 
+cor 
+ -1 
 ```
 
 
@@ -127,7 +127,7 @@ type: sub-section
 **Activité** d'une station correspond à la dispersion des valeurs de saturation. On utilise donc la variance.
 
 
-Gourpement par Activité
+Groupement par Activité
 ========================================================
 ![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
 ***
@@ -147,17 +147,7 @@ Voisines Vides
 ***
 
 ```
-
-	Pearson's product-moment correlation
-
-data:  stationEx$SATURATION and stationEx$STAT_VIDES
-t = -4.8957, df = 7, p-value = 0.001762
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- -0.9745060 -0.5186647
-sample estimates:
-       cor 
--0.8797506 
+[1] -0.8797506
 ```
 
 

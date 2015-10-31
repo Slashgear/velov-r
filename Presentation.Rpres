@@ -118,12 +118,10 @@ plot(a)
 Groupement par "Bonus" actuel
 ========================================================
 ```{r, echo=FALSE}
-velov <- faits
-bonus <- factor(velov$BONUS)
-velov$BONUS <- as.integer(bonus)
-velov <- aggregate(velov,by=list(velov$ID_STATION),FUN="mean")
-velov <- subset(velov, select=c("ID_STATION", "BONUS"))
-stationBonus <- merge(x = stations,y = velov)
+stations2 <- stations
+bonus <- factor(stations2$BONUS)
+stations2$BONUS <- as.integer(bonus)
+stationBonus <- stations2
 
 d <- data.frame(lat=stationBonus$LONGITUDE,
                 lon=stationBonus$LATITUDE,stationBonus$BONUS)
@@ -166,11 +164,12 @@ type: sub-section
 **Activité** d'une station correspond à la dispersion des valeurs de saturation. On utilise donc la variance.
 
 
-Gourpement par Activité
+Groupement par Activité
 ========================================================
 ```{r, echo=FALSE}
 velov2 <- subset(faits, select=c("ID_STATION", "SATURATION"))
-stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE","ALTITUDE"))
+stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE","ALTITUDE","NB_STAT_VOISINES"))
+stations2 <- stations2[stations2$NB_STAT_VOISINES > 0,]
 
 #Group by ID_STATION and Mean
 velov2 <- aggregate(velov2,by=list(velov2$ID_STATION),FUN="var")
@@ -233,7 +232,7 @@ abline(line)
 ```
 ***
 ```{r, echo=FALSE}
-cor.test(stationEx$SATURATION, stationEx$STAT_VIDES)
+cor(stationEx$SATURATION, stationEx$STAT_VIDES)
 ```
 
 
