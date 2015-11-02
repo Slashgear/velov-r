@@ -30,20 +30,12 @@ Nos KPI
 Un projet en plusieurs étapes
 ========================================================
 
-//TODO faire un shéma
-Collecte des données par sh et CRON
+![Schéma des étapes du projet](images/schema_etapes.PNG)
 
-Traitement des JSON en sql
-
-Import des SQL dans l'ODS
-
-ETL pour l'EDD (SQL et Talend)
-
-Reporting R et QlikSense
 
 Modèle de l'EDD
 ========================================================
-//TODO modèle
+![Modèle de l'entrepôt de données](images/modele_EDD.jpg)
 
 Le Bonus
 ========================================================
@@ -106,13 +98,13 @@ cor.test(cl2$cluster, stationBonus$BONUS)
 	Pearson's product-moment correlation
 
 data:  cl2$cluster and stationBonus$BONUS
-t = 1246500000, df = 345, p-value < 2.2e-16
+t = -1246500000, df = 345, p-value < 2.2e-16
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 1 1
+ -1 -1
 sample estimates:
 cor 
-  1 
+ -1 
 ```
 
 

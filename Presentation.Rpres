@@ -30,20 +30,12 @@ Nos KPI
 Un projet en plusieurs étapes
 ========================================================
 
-//TODO faire un shéma
-Collecte des données par sh et CRON
+![Schéma des étapes du projet](images/schema_etapes.PNG)
 
-Traitement des JSON en sql
-
-Import des SQL dans l'ODS
-
-ETL pour l'EDD (SQL et Talend)
-
-Reporting R et QlikSense
 
 Modèle de l'EDD
 ========================================================
-//TODO modèle
+![Modèle de l'entrepôt de données](images/modele_EDD.jpg)
 
 Le Bonus
 ========================================================
