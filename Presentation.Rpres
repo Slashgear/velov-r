@@ -41,6 +41,9 @@ ETL pour l'EDD (SQL et Talend)
 
 Reporting R et QlikSense
 
+Modèle de l'EDD
+========================================================
+//TODO modèle
 
 Le Bonus
 ========================================================
@@ -58,13 +61,6 @@ faits <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
 meteo <- read.csv2("EDD/meteo.csv", header = TRUE, sep = ";", quote = "\"")
 temps <- read.csv2("EDD/temps.csv", header = TRUE, sep = ";", quote = "\"")
 summary(subset(stations,select=c("ALTITUDE")))
-```
-
-Répartition des altitudes de stations
-========================================================
-
-```{r, echo=FALSE}
-boxplot(stations$ALTITUDE,horizontal=T,main="Altitude des Stations")
 ```
 
 Groupements par altitudes de stations
@@ -127,8 +123,8 @@ d <- data.frame(lat=stationBonus$LONGITUDE,
                 lon=stationBonus$LATITUDE,stationBonus$BONUS)
 a <- ggmap(mapImageData1, extent = "panel",legend="topright")
 a <- a + geom_point(data=d, aes(x = lat,y = lon),colour=stationBonus$BONUS)
-a <- a + ggtitle("Stations avec Bonus")
-plot(a)
+ab <- a + ggtitle("Stations avec Bonus")
+plot(ab)
 ```
 
 Comparaison entre les deux groupements
@@ -169,7 +165,6 @@ Groupement par Activité
 ```{r, echo=FALSE}
 velov2 <- subset(faits, select=c("ID_STATION", "SATURATION"))
 stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE","ALTITUDE","NB_STAT_VOISINES"))
-stations2 <- stations2[stations2$NB_STAT_VOISINES > 0,]
 
 #Group by ID_STATION and Mean
 velov2 <- aggregate(velov2,by=list(velov2$ID_STATION),FUN="var")
@@ -184,12 +179,7 @@ cl3 <- kmeans(sat, 3)
 cl4 <- kmeans(sat, 4)
 cl5 <- kmeans(sat, 5)
 
-d <- data.frame(lat=stationBonus$LONGITUDE,
-             lon=stationBonus$LATITUDE,cl5$cluster)
-a <- ggmap(mapImageData1, extent = "panel")
-a <- a + geom_point(data=d, aes(x = lat,y = lon, colour=cl5$cluster), colour=cl5$cluster)
-a <- a + ggtitle("Classement des stations en 5 groupes")
-plot(a)
+plot(ab)
 ```
 ***
 ```{r, echo=FALSE}
@@ -199,6 +189,7 @@ a <- ggmap(mapImageData1, extent = "panel")
 a <- a + geom_point(data=d, aes(x = lat,y = lon, colour=cl2$cluster), colour=cl2$cluster)
 a <- a + ggtitle("Classement des stations en 2 groupes")
 plot(a)
+
 ```
 
 Voisines Vides
@@ -206,7 +197,7 @@ Voisines Vides
 type: sub-section
 ```{r, echo=FALSE}
 
-velov2 <- subset(faits, select=c("ID_STATION", "SATURATION","STAT_VIDES"))
+velov2 <- subset(faits, select=c("ID_STATION", "SATURATION","STAT_VIDES","STAT_PLEINES","STAT_EN_PANNES"))
 stations2 <- subset(stations, select=c("ID_STATION","NOM_STATION","LATITUDE","LONGITUDE"))
 
 #Group by station and stat
@@ -236,16 +227,25 @@ cor(stationEx$SATURATION, stationEx$STAT_VIDES)
 ```
 
 
-Résultats obtenus avec Qlik
+Voisines pleines
 ========================================================
-type: sub-section
+
+```{r, echo=FALSE}
+stationEx <- stationBonus[stationBonus$ID_STATION == 1021,]
+plot(stationEx$SATURATION,stationEx$STAT_VIDES,main="Saturation moyenne/nombre de voisines pleines - Station 1021",xlab="Saturation moyenne",ylab="Nombre de voisines pleines")
+abline(line)
+
+```
+***
+```{r, echo=FALSE}
+cor(stationEx$SATURATION, stationEx$STAT_PLEINES)
+```
 
 
 Conclusion
 ========================================================
 
-Le choix du bonus dépend donc uniquement que de l'altitude de la station.
-Il reste à montrer que l'altitude impacte l'utilisation de la station.
+
 
 Pour aller plus loin
 ========================================================

@@ -41,6 +41,9 @@ ETL pour l'EDD (SQL et Talend)
 
 Reporting R et QlikSense
 
+Modèle de l'EDD
+========================================================
+//TODO modèle
 
 Le Bonus
 ========================================================
@@ -63,37 +66,32 @@ Analyse de l'altitude des Stations
  Max.   :287.2  
 ```
 
-Répartition des altitudes de stations
-========================================================
-
-![plot of chunk unnamed-chunk-2](Presentation-figure/unnamed-chunk-2-1.png) 
-
 Groupements par altitudes de stations
 ========================================================
 
-![plot of chunk unnamed-chunk-3](Presentation-figure/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-2](Presentation-figure/unnamed-chunk-2-1.png) 
 ***
-![plot of chunk unnamed-chunk-4](Presentation-figure/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-3](Presentation-figure/unnamed-chunk-3-1.png) 
 
 Visualisation du groupement
 ========================================================
 
 
 
-![plot of chunk unnamed-chunk-6](Presentation-figure/unnamed-chunk-6-1.png) 
+![plot of chunk unnamed-chunk-5](Presentation-figure/unnamed-chunk-5-1.png) 
 ***
-![plot of chunk unnamed-chunk-7](Presentation-figure/unnamed-chunk-7-1.png) 
+![plot of chunk unnamed-chunk-6](Presentation-figure/unnamed-chunk-6-1.png) 
 
 Groupement par "Bonus" actuel
 ========================================================
-![plot of chunk unnamed-chunk-8](Presentation-figure/unnamed-chunk-8-1.png) 
+![plot of chunk unnamed-chunk-7](Presentation-figure/unnamed-chunk-7-1.png) 
 
 Comparaison entre les deux groupements
 ========================================================
 
-![plot of chunk unnamed-chunk-9](Presentation-figure/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-8](Presentation-figure/unnamed-chunk-8-1.png) 
 ***
-![plot of chunk unnamed-chunk-10](Presentation-figure/unnamed-chunk-10-1.png) 
+![plot of chunk unnamed-chunk-9](Presentation-figure/unnamed-chunk-9-1.png) 
 
 Vérifications
 ========================================================
@@ -108,13 +106,13 @@ cor.test(cl2$cluster, stationBonus$BONUS)
 	Pearson's product-moment correlation
 
 data:  cl2$cluster and stationBonus$BONUS
-t = -1246500000, df = 345, p-value < 2.2e-16
+t = 1246500000, df = 345, p-value < 2.2e-16
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -1 -1
+ 1 1
 sample estimates:
 cor 
- -1 
+  1 
 ```
 
 
@@ -129,21 +127,21 @@ type: sub-section
 
 Groupement par Activité
 ========================================================
-![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-11](Presentation-figure/unnamed-chunk-11-1.png) 
 ***
-![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
 
 Voisines Vides
 ========================================================
 type: sub-section
-![plot of chunk unnamed-chunk-14](Presentation-figure/unnamed-chunk-14-1.png) 
+![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
 ***
 **Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
 
 Voisines Vides
 ========================================================
 
-![plot of chunk unnamed-chunk-15](Presentation-figure/unnamed-chunk-15-1.png) 
+![plot of chunk unnamed-chunk-14](Presentation-figure/unnamed-chunk-14-1.png) 
 ***
 
 ```
@@ -151,16 +149,21 @@ Voisines Vides
 ```
 
 
-Résultats obtenus avec Qlik
+Voisines pleines
 ========================================================
-type: sub-section
+
+![plot of chunk unnamed-chunk-16](Presentation-figure/unnamed-chunk-16-1.png) 
+***
+
+```
+[1] 0.9912032
+```
 
 
 Conclusion
 ========================================================
 
-Le choix du bonus dépend donc uniquement que de l'altitude de la station.
-Il reste à montrer que l'altitude impacte l'utilisation de la station.
+
 
 Pour aller plus loin
 ========================================================
