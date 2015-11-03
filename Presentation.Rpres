@@ -224,9 +224,9 @@ Voisines pleines
 
 ```{r, echo=FALSE}
 stationEx <- stationBonus[stationBonus$ID_STATION == 1021,]
-plot(stationEx$SATURATION,stationEx$STAT_VIDES,main="Saturation moyenne/nombre de voisines pleines - Station 1021",xlab="Saturation moyenne",ylab="Nombre de voisines pleines")
+plot(stationEx$SATURATION,stationEx$STAT_PLEINES,main="Saturation moyenne/nombre de voisines pleines - Station 1021",xlab="Saturation moyenne",ylab="Nombre de voisines pleines")
+line <- lm(stationEx$STAT_PLEINES ~ stationEx$SATURATION)
 abline(line)
-
 ```
 ***
 ```{r, echo=FALSE}
