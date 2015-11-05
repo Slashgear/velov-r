@@ -44,15 +44,11 @@ Nous nous sommes intéressé à la façon dont JCDECAUX avait groupé ses statio
 - Les stations avec Bonus
 - Les stations sans Bonus
 
-Analyse de l'altitude des Stations
-========================================================
-
 ```{r, echo=FALSE}
 stations <- read.csv2("EDD/stations.csv", header = TRUE, sep = ";", quote = "\"")
 faits <- read.csv2("EDD/fait.csv", header = TRUE, sep = ";", quote = "\"")
 meteo <- read.csv2("EDD/meteo.csv", header = TRUE, sep = ";", quote = "\"")
 temps <- read.csv2("EDD/temps.csv", header = TRUE, sep = ";", quote = "\"")
-summary(subset(stations,select=c("ALTITUDE")))
 ```
 
 Groupements par altitudes de stations
