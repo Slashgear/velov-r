@@ -1,4 +1,5 @@
 *.jpg
+!/images
 .RData
 .Rhistory
 /EDD
