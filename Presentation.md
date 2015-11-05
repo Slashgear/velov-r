@@ -44,19 +44,7 @@ Nous nous sommes intéressé à la façon dont JCDECAUX avait groupé ses statio
 - Les stations avec Bonus
 - Les stations sans Bonus
 
-Analyse de l'altitude des Stations
-========================================================
 
-
-```
-    ALTITUDE    
- Min.   :163.5  
- 1st Qu.:172.3  
- Median :175.0  
- Mean   :184.3  
- 3rd Qu.:180.1  
- Max.   :287.2  
-```
 
 Groupements par altitudes de stations
 ========================================================
@@ -74,37 +62,23 @@ Visualisation du groupement
 ***
 ![plot of chunk unnamed-chunk-6](Presentation-figure/unnamed-chunk-6-1.png) 
 
-Groupement par "Bonus" actuel
-========================================================
-![plot of chunk unnamed-chunk-7](Presentation-figure/unnamed-chunk-7-1.png) 
-
 Comparaison entre les deux groupements
 ========================================================
 
-![plot of chunk unnamed-chunk-8](Presentation-figure/unnamed-chunk-8-1.png) 
+![plot of chunk unnamed-chunk-7](Presentation-figure/unnamed-chunk-7-1.png) 
 ***
-![plot of chunk unnamed-chunk-9](Presentation-figure/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-8](Presentation-figure/unnamed-chunk-8-1.png) 
 
 Vérifications
 ========================================================
 
 
 ```r
-cor.test(cl2$cluster, stationBonus$BONUS)
+cor(cl2$cluster, stationBonus$BONUS)
 ```
 
 ```
-
-	Pearson's product-moment correlation
-
-data:  cl2$cluster and stationBonus$BONUS
-t = -1246500000, df = 345, p-value < 2.2e-16
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- -1 -1
-sample estimates:
-cor 
- -1 
+[1] 1
 ```
 
 
@@ -119,21 +93,21 @@ type: sub-section
 
 Groupement par Activité
 ========================================================
-![plot of chunk unnamed-chunk-11](Presentation-figure/unnamed-chunk-11-1.png) 
+![plot of chunk unnamed-chunk-10](Presentation-figure/unnamed-chunk-10-1.png) 
 ***
-![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-11](Presentation-figure/unnamed-chunk-11-1.png) 
 
 Voisines Vides
 ========================================================
 type: sub-section
-![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-12](Presentation-figure/unnamed-chunk-12-1.png) 
 ***
 **Voisinage d'une station** = l'ensemble des stations situées à moins de 275m.
 
 Voisines Vides
 ========================================================
 
-![plot of chunk unnamed-chunk-14](Presentation-figure/unnamed-chunk-14-1.png) 
+![plot of chunk unnamed-chunk-13](Presentation-figure/unnamed-chunk-13-1.png) 
 ***
 
 ```
@@ -144,7 +118,7 @@ Voisines Vides
 Voisines pleines
 ========================================================
 
-![plot of chunk unnamed-chunk-16](Presentation-figure/unnamed-chunk-16-1.png) 
+![plot of chunk unnamed-chunk-15](Presentation-figure/unnamed-chunk-15-1.png) 
 ***
 
 ```
@@ -155,7 +129,8 @@ Voisines pleines
 Conclusion
 ========================================================
 
-
+* Sujet de projet imaginé par le groupe
+* Du choix des données à l'analyse décisionnelle
 
 Pour aller plus loin
 ========================================================

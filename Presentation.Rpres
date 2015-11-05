@@ -99,8 +99,9 @@ a <- a + ggtitle("Classement des stations en 3 groupes")
 plot(a)
 ```
 
-Groupement par "Bonus" actuel
+Comparaison entre les deux groupements
 ========================================================
+
 ```{r, echo=FALSE}
 stations2 <- stations
 bonus <- factor(stations2$BONUS)
@@ -113,13 +114,6 @@ a <- ggmap(mapImageData1, extent = "panel",legend="topright")
 a <- a + geom_point(data=d, aes(x = lat,y = lon),colour=stationBonus$BONUS)
 ab <- a + ggtitle("Stations avec Bonus")
 plot(ab)
-```
-
-Comparaison entre les deux groupements
-========================================================
-
-```{r, echo=FALSE}
-plot(a)
 ```
 ***
 ```{r, echo=FALSE}
@@ -135,7 +129,7 @@ Vérifications
 ========================================================
 
 ```{r}
-cor.test(cl2$cluster, stationBonus$BONUS)
+cor(cl2$cluster, stationBonus$BONUS)
 ```
 
 
@@ -233,7 +227,8 @@ cor(stationEx$SATURATION, stationEx$STAT_PLEINES)
 Conclusion
 ========================================================
 
-
+* Sujet de projet imaginé par le groupe
+* Du choix des données à l'analyse décisionnelle
 
 Pour aller plus loin
 ========================================================
